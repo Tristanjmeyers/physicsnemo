@@ -356,7 +356,11 @@ class DistributedManager(object):
         rank = int(os.environ.get("SLURM_PROCID"))
         world_size = int(os.environ.get("SLURM_NPROCS"))
         local_rank = int(os.environ.get("SLURM_LOCALID"))
-        addr = os.environ.get("SLURM_LAUNCH_NODE_IPADDR")
+        try:
+            addr = os.environ.get("SLURM_LAUNCH_NODE_IPADDR")
+        except TypeError:
+            raise EnvironmentError('SLURM variable "SLURM_LAUNCH_NODE_IPADDR" was not detected in the environment. Maybe you need to run with "srun"?')
+
 
         DistributedManager.setup(
             rank=rank,
