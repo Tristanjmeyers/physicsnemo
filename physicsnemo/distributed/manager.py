@@ -359,7 +359,10 @@ class DistributedManager(object):
         try:
             addr = os.environ.get("SLURM_LAUNCH_NODE_IPADDR")
         except TypeError:
-            raise EnvironmentError('SLURM variable "SLURM_LAUNCH_NODE_IPADDR" was not detected in the environment. Maybe you need to run with "srun"?')
+            raise EnvironmentError(
+                'SLURM variable "SLURM_LAUNCH_NODE_IPADDR" was not detected in the environment. Maybe you need to run with "srun"?'
+            )
+
 
 
         DistributedManager.setup(
